@@ -1,4 +1,4 @@
-import express from "express";
+import express, { request } from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import pg from "pg";
@@ -17,7 +17,19 @@ app.get("/", (req, res) => {
 });
 
 app.get("/games", async (req, res) => {
-  const result = await db.query(`SELECT game_title, img_src FROM games`);
+  const result = await db.query(`SELECT
+    games.id,
+    games.game_title,
+    games.release_year,
+    games.img_src,
+    ARRAY_AGG (json_build_object(
+      'cheat_title', cheats.cheat_title,
+      'cheat_code', cheats.code,
+      'cheat_effect', cheats.effect
+    )) AS cheat_info
+    FROM games
+    LEFT JOIN cheats ON cheats.game_id = games.id
+    GROUP BY games.id, games.release_year, games.img_src`);
   res.json(result.rows);
 });
 
@@ -28,18 +40,23 @@ app.get("/games/:id", async (req, res) => {
     games.game_title,
     games.release_year,
     games.img_src,
-    ARRAY_AGG(cheats.cheat_title) AS cheat_titles,
-    ARRAY_AGG(cheats.code) AS cheat_codes,
-    ARRAY_AGG(cheats.effect) AS cheat_effects
+    ARRAY_AGG (json_build_object(
+      'cheat_title', cheats.cheat_title,
+      'cheat_code', cheats.code,
+      'cheat_effect', cheats.effect
+    )) AS cheat_info
     FROM games
-    LEFT JOIN cheats ON cheats.game_id = games.id
-    GROUP BY games.id,
-    games.game_title,
-    games.release_year,
-    games.img_src`
+    LEFT JOIN cheats ON cheats.game_id = games.id WHERE games.id = $1
+    GROUP BY games.id, games.release_year, games.img_src`,
+    [req.params.id]
   );
   res.json(result.rows);
 });
+
+// app.post(`/cheats`, async(req, res) => {
+//   const  = req.body;
+//   const
+// })
 
 app.listen(2424, () => {
   console.log(`server started on http://localhost:2424`);
