@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import Functions from "./FetchFunctions";
+import FetchFunctions from "./FetchFunctions";
 // import { useState, useEffect } from "react";
 
 export default function GameLibrary() {
