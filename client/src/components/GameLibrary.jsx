@@ -35,7 +35,7 @@ export default function GameLibrary() {
         ))}
       </div>
       <Link className="backToStart" to="/">
-        Back to Start
+        Back to Start Menu
       </Link>
     </div>
   );

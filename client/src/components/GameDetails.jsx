@@ -38,24 +38,30 @@ export default function GameDetails() {
   };
 
   return (
-    <div key={game.id} className="game-detail">
-      <h2>{game.game_title}</h2>
-      <img src={game.img_src} alt={game.game_title} />
-      <p>{game.genre}</p>
-      <p>{game.release_year}</p>
+    <div key={game.id} className="game-detail-page">
+      <div className="game-main-card">
+        <img src={game.img_src} alt={game.game_title} />
+        <div className="game-info">
+          <h2>{game.game_title}</h2>
+          <p>{game.genre}</p>
+          <p>{game.release_year}</p>
+        </div>
+      </div>
 
-      <h3>Cheat Codes:</h3>
-      {game.cheat_info &&
-        game.cheat_info.map((cheat, i) => (
-          <div key={i} className="cheat_item">
-            <h4>{cheat.cheat_title}</h4>
-            <p>Code: {cheat.cheat_code}</p>
-            <p>
-              <em>{cheat.cheat_effect}</em>
-            </p>
-          </div>
-        ))}
-      <form onSubmit={handleSubmit}>
+      <div className="cheats-section">
+        <h3>Cheat Codes:</h3>
+        {game.cheat_info &&
+          game.cheat_info.map((cheat, i) => (
+            <div key={i} className="cheat_item">
+              <h2>{cheat.cheat_title}</h2>
+              <p>Code: {cheat.cheat_code}</p>
+              <p>
+                <em>{cheat.cheat_effect}</em>
+              </p>
+            </div>
+          ))}
+      </div>
+      <form className="cheat-from" onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="Cheat Title"
