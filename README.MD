@@ -9,3 +9,8 @@ created and seeded my database on supabase with two tables games and cheat codes
 created queries to ask db for info I want displaying
 
 started on my frontend by adding components as a 'skeleton' of how I want my app tlayout to be.
+
+18/10/25
+changed components around as I was confusing myself with what does what. I now have a header that will be visible all the time using browser router and routes. Then I have my landing page component that the client will open the app onto.The plan with Landing page is to have an enter button that when clicked, will take them to the GameLibrary component.
+
+Note to self - finish linking GameLibrary with GameDetails. GameDetails will be a new route that displays img, title, and release year along with the cheat codes.

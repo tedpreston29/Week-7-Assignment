@@ -1,16 +1,15 @@
-import { BrowserRouter, Routes, Route } from "react-router";
-import HomePage from "./components/GameLibrary";
+import { BrowserRouter, Routes, Route, Link } from "react-router";
+import Header from "./components/Header";
+import LandingPage from "./components/LandingPage";
 import GameLibrary from "./components/GameLibrary";
 
 export default function App() {
   return (
     <BrowserRouter>
-      <div className="App">
-        <h1>PS2 CHEAT CODE ARCHIVE</h1>
-      </div>
+      <Header />
       <Routes className="Routes">
-        <Route path="/" element={<HomePage />} />
-        <Route path="/games" element={<GameLibrary />} />
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/gamelibrary" element={<GameLibrary />} />
       </Routes>
     </BrowserRouter>
   );
