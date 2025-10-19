@@ -54,10 +54,15 @@ app.get("/games/:id", async (req, res) => {
   res.json(result.rows);
 });
 
-// app.post(`/cheats`, async(req, res) => {
-//   const  = req.body;
-//   const
-// })
+app.post(`/cheats`, async (req, res) => {
+  const { cheat_title, code, effect, game_id } = req.body;
+  const result = await db.query(
+    `INSERT INTO cheats (cheat_title, code, effect, game_id)
+    VALUES ($1, $2, $3, $4) RETURNING *`,
+    [cheat_title, code, effect, game_id]
+  );
+  res.json(result.rows[0]);
+});
 
 app.listen(2424, () => {
   console.log(`server started on http://localhost:2424`);
