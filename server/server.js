@@ -41,6 +41,7 @@ app.get("/games/:id", async (req, res) => {
     games.release_year,
     games.img_src,
     ARRAY_AGG (json_build_object(
+      'id', cheats.id,     
       'cheat_title', cheats.cheat_title,
       'cheat_code', cheats.code,
       'cheat_effect', cheats.effect

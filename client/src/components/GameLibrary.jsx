@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 
 export default function GameLibrary() {
   const [games, setGames] = useState([]);
@@ -14,17 +14,22 @@ export default function GameLibrary() {
     }
     fetchGames();
   }, []);
+
+  if (!games) {
+    return <p>Loading...</p>;
+  }
+
   return (
     <div>
       <div className="library-title">
         <h2>Game Library</h2>
       </div>
       <div className="game-grid">
-        {games.map((game) => (
-          <div key={game.id} className="game-card">
-            <Link to={`games/${game.id}`}>
-              <img src={games.img_src} alt={games.game_title} />
+        {games.map((games) => (
+          <div key={games.id} className="game-card">
+            <Link to={`/games/${games.id}`}>
               <p>{games.game_title}</p>
+              <img src={games.img_src} alt={games.game_title} />
             </Link>
           </div>
         ))}
