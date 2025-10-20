@@ -11,7 +11,9 @@ export default function GameDetails() {
 
   useEffect(() => {
     async function fetchGame() {
-      const data = await fetch(`http://localhost:2424/games/${id}`);
+      const data = await fetch(
+        `https://week-7-assignment-gt03.onrender.com/games/${id}`
+      );
       const gameData = await data.json();
       setGame(gameData[0]);
     }
@@ -25,7 +27,7 @@ export default function GameDetails() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await fetch("http://localhost:2424/cheats", {
+    await fetch("https://week-7-assignment-gt03.onrender.com/cheats", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
