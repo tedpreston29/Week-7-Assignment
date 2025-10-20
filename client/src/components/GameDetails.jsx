@@ -40,11 +40,11 @@ export default function GameDetails() {
   return (
     <div key={game.id} className="game-detail-page">
       <div className="game-main-card">
-        <img src={game.img_src} alt={game.game_title} />
+        <img className="game-image" src={game.img_src} alt={game.game_title} />
         <div className="game-info">
-          <h2>{game.game_title}</h2>
-          <p>{game.genre}</p>
-          <p>{game.release_year}</p>
+          <h2 className="game-title">{game.game_title}</h2>
+          <p className="game-genre">{game.genre}</p>
+          <p className="game-year">{game.release_year}</p>
         </div>
       </div>
 
@@ -52,40 +52,46 @@ export default function GameDetails() {
         <h3>Cheat Codes:</h3>
         {game.cheat_info &&
           game.cheat_info.map((cheat, i) => (
-            <div key={i} className="cheat_item">
-              <h2>{cheat.cheat_title}</h2>
-              <p>Code: {cheat.cheat_code}</p>
+            <div key={i} className="cheat-card">
+              <h2 className="cheat-title">{cheat.cheat_title}</h2>
+              <p className="cheat-code">Code: {cheat.cheat_code}</p>
               <p>
-                <em>{cheat.cheat_effect}</em>
+                <em className="cheat-effect">{cheat.cheat_effect}</em>
               </p>
             </div>
           ))}
       </div>
-      <form className="cheat-from" onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Cheat Title"
-          value={cheatTitle}
-          onChange={(e) => setCheatTitle(e.target.value)}
-          required
-        />
-        <input
-          type="text"
-          placeholder="Cheat Code"
-          value={cheatCode}
-          onChange={(e) => setCheatCode(e.target.value)}
-          required
-        />
-        <input
-          type="text"
-          placeholder="Effect"
-          value={cheatEffect}
-          onChange={(e) => setCheatEffect(e.target.value)}
-          required
-        />
-        <button type="submit">ADD CHEAT</button>
+      <form className="cheat-form" onSubmit={handleSubmit}>
+        <div className="input-field">
+          <input
+            type="text"
+            placeholder="Cheat Title"
+            value={cheatTitle}
+            onChange={(e) => setCheatTitle(e.target.value)}
+            required
+          />
+          <input
+            type="text"
+            placeholder="Cheat Code"
+            value={cheatCode}
+            onChange={(e) => setCheatCode(e.target.value)}
+            required
+          />
+          <input
+            type="text"
+            placeholder="Effect"
+            value={cheatEffect}
+            onChange={(e) => setCheatEffect(e.target.value)}
+            required
+          />
+        </div>
+        <button className="submit-button" type="submit">
+          ADD CHEAT
+        </button>
       </form>
-      <Link to="/GameLibrary">Back to Library</Link>
+      <Link className="backToLibrary" to="/GameLibrary">
+        Back to Library
+      </Link>
     </div>
   );
 }
