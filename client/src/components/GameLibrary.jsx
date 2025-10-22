@@ -7,7 +7,9 @@ export default function GameLibrary() {
   useEffect(() => {
     console.log("fetching Data");
     async function fetchGames() {
-      const data = await fetch(`https://week-7-assignment-gt03.onrender.com/`);
+      const data = await fetch(
+        `https://week-7-assignment-gt03.onrender.com/games`
+      );
       const gameData = await data.json();
       console.log(`fetched data`, gameData);
       setGames(gameData);
